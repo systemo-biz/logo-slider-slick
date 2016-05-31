@@ -53,20 +53,20 @@ class LogoShortcodeS {
       <div class="<?php echo $class_wrapper ?>">
         <div class="logo-slider-slick-wrapper" data-slick='{"slidesToShow": 4, "slidesToScroll": 4}'>
           <?php foreach($posts as $post): setup_postdata($post); ?>
-            <div class="swiper-slide">
+            <div class="logo-slide-s">
 
               <?php if($url): ?>
                 <a href="<?php echo get_the_permalink($post->ID); ?>">
               <?php endif; ?>
 
-              <div class="post-swiper-thumbnail">
+              <div class="post-logo-thumbnail">
                 <?php echo get_the_post_thumbnail( $post->ID, 'team-thumb' ); ?>
               </div>
-              <div class="post-swiper-text">
-                <div class="post-swiper-title">
+              <div class="post-logo-text">
+                <div class="post-logo-title">
                   <strong><?php echo $post->post_title; ?></strong>
                 </div>
-                <div class="post-swiper-content">
+                <div class="post-logo-content">
                   <span><?php echo $post->post_content; ?></span>
                 </div>
 
@@ -97,65 +97,21 @@ class LogoShortcodeS {
   function wp_enqueue_scripts_cb(){
     wp_register_style( 'slick', plugin_dir_url(__FILE__).'slick-master/slick/slick.css', '', $ver = '3.1.0', $media = 'all' );
     wp_register_style( 'slick-theme', plugin_dir_url(__FILE__).'slick-master/slick/slick-theme.css', '', $ver = '3.1.0', $media = 'all' );
+    wp_register_style( 'slick-style', plugin_dir_url(__FILE__).'style.css', '', $ver = '3.1.0', $media = 'all' );
+
     wp_register_script( 'slick', plugin_dir_url(__FILE__).'slick-master/slick/slick.min.js', array('jquery'), $ver = '3.1.0' );
     wp_enqueue_style( 'slick' );
+    wp_enqueue_style( 'slick-theme' );
+    wp_enqueue_style( 'slick-style' );
     wp_enqueue_script( 'slick' );
   }
 
 
   function hook_css(){
 
-      $post = get_post();
-
       ?>
         <style>
-          .team-sc-s-wrapper {
-              width: 870px;
-              margin: auto;
-          }
 
-          .team-sc-s-wrapper .swiper-slide {
-            visibility: hidden;
-
-          }
-
-          .team-sc-s-wrapper .post-swiper-text {
-            visibility: hidden;
-          }
-
-          .team-sc-s-wrapper .swiper-slide-active {
-              !transform: scale(1.3);
-              z-index: 1;
-              transition-duration: 0.5s;
-              visibility: visible;
-
-
-          }
-
-          .team-sc-s-wrapper .swiper-slide-active .post-swiper-text {
-            !display: block;
-            visibility: visible;
-
-          }
-
-          .team-sc-s-wrapper .swiper-slide-next,
-          .team-sc-s-wrapper .swiper-slide-prev {
-            !transition-duration: 1s;
-                opacity: 0.5;
-                transform: scale(0.8);
-                visibility: visible;
-
-
-          }
-
-          .team-sc-s-wrapper .swiper-container {
-              !width: 100%;
-              !height: 100%;
-          }
-
-          .team-sc-s-wrapper .swiper-slide {
-              min-height: 500px;
-          }
         </style>
       <?php
     }
