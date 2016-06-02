@@ -13,6 +13,9 @@ class LogoShortcodeS {
   function shortcode_callback($atts){
 
     extract( shortcode_atts( array(
+        'title' => '',
+        'logo_title' => '1',
+        'black_style' => '0', //Стиль для темного фона. 0 = нет, 1 = да
         'post_type'       => 'logo-s',
         'numberposts'     => 7,
       	'offset'          => 0,
@@ -46,35 +49,47 @@ class LogoShortcodeS {
      'post_status'     => $post_status,
    ));
 
+   $black_style_class = ($black_style == '0' ? '' : 'black-style');
 
-
-     ob_start();
+   ob_start();
      ?>
-      <div class="<?php echo $class_wrapper ?>">
+      <div class="logo-slick-wrapper <?php echo $class_wrapper . ' ' . $black_style_class ?>">
+        <?php if(isset($title)): ?>
+          <h1><?php echo $title; ?></h1>
+        <?php endif; ?>
+
         <div class="logo-slider-slick-wrapper" data-slick='{"slidesToShow": 4, "slidesToScroll": 4}'>
+
           <?php foreach($posts as $post): setup_postdata($post); ?>
+
             <div class="logo-slide-s">
 
               <?php if($url): ?>
                 <a href="<?php echo get_the_permalink($post->ID); ?>">
               <?php endif; ?>
 
-              <div class="post-logo-thumbnail">
-                <?php echo get_the_post_thumbnail( $post->ID, 'team-thumb' ); ?>
-              </div>
-              <div class="post-logo-text">
-                <div class="post-logo-title">
-                  <strong><?php echo $post->post_title; ?></strong>
+                <div class="post-logo-thumbnail">
+                  <?php echo get_the_post_thumbnail( $post->ID, $size ); ?>
                 </div>
-                <div class="post-logo-content">
-                  <span><?php echo $post->post_content; ?></span>
+                <div class="post-logo-text">
+
+                  <?php if($logo_title): ?>
+                    <div class="post-logo-title">
+                      <strong><?php echo $post->post_title; ?></strong>
+                    </div>
+                  <?php endif; ?>
+
+                  <div class="post-logo-content">
+                    <span><?php echo $post->post_content; ?></span>
+                  </div>
+
+
                 </div>
 
-                <?php if($url): ?>
+              <?php if($url): ?>
                   </a>
-                <?php endif; ?>
+              <?php endif; ?>
 
-              </div>
             </div>
 
           <?php endforeach; wp_reset_postdata(); ?>

@@ -1,0 +1,36 @@
+
+.logo-slick-wrapper  .slick-prev:before,
+.logo-slick-wrapper  .slick-next:before {
+    color: #794343;
+}
+
+
+
+.logo-slick-wrapper .post-logo-title {
+    text-align: center;
+}
+
+
+.logo-slick-wrapper .post-logo-thumbnail {
+    padding: 20%;
+}
+
+.logo-slick-wrapper .logo-slide-s {
+    padding: 15px;
+}
+
+
+
+
+/*
+Темный стиль: black_style=1
+*/
+ .logo-slick-wrapper.black-style .slick-prev:before,
+ .logo-slick-wrapper.black-style .slick-next:before {
+     color: #fff;
+ }
+
+.logo-slick-wrapper.black-style h1 {
+  color: #fff;
+
+}
